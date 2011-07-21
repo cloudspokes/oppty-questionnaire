@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Groups of questions</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Group_Weight__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>How much of the overall score is this group worth</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How much of the overall score is this group worth</inlineHelpText>
+        <label>Group Weight</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Questions_in_Group__c</fullName>
+        <description>How many questions are in this group?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How many questions are in this group?</inlineHelpText>
+        <label>Questions in Group</label>
+        <summaryForeignKey>QwikScore_Question__c.QwikScore_Question_Group__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>QwikScore_Survey__c</fullName>
+        <description>Which survey does this question group belong to?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Which survey does this question group belong to?</inlineHelpText>
+        <label>QwikScore Survey</label>
+        <referenceTo>QwikScore__c</referenceTo>
+        <relationshipLabel>Question Groups</relationshipLabel>
+        <relationshipName>QwikScore_Question_Groups</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Sequence_Number__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Controls the ordering of question groups when presented to a user.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>In what order should this group be displayed? Lower numbers come first.</inlineHelpText>
+        <label>Sequence Number</label>
+        <precision>2</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Question_Weight__c</fullName>
+        <description>Total weight from all questions in this group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total weight from all questions in this group.</inlineHelpText>
+        <label>Total Question Weight</label>
+        <summarizedField>QwikScore_Question__c.Question_Weight__c</summarizedField>
+        <summaryForeignKey>QwikScore_Question__c.QwikScore_Question_Group__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <label>QwikScore Question Group</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>QwikScore Question Group Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>QwikScore Question Groups</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>QwikScore_Survey__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Group_Weight__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Questions_in_Group__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Sequence_Number__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>QwikScore_Survey__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Questions_in_Group__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Sequence_Number__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Group_Weight__c</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Cannot_exceed_100_total_question_weight</fullName>
+        <active>true</active>
+        <errorConditionFormula>Total_Question_Weight__c &gt; 100</errorConditionFormula>
+        <errorMessage>You cannot exceed 100% for the total question weight of a group. Please reduce the weight of associated questions to total 100%.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Group_weight_between_0_and_100</fullName>
+        <active>true</active>
+        <description>Ensure that a weight of a group falls between 0 and 100 (inclusive).</description>
+        <errorConditionFormula>OR( Group_Weight__c &lt; 0, Group_Weight__c &gt; 100)</errorConditionFormula>
+        <errorMessage>The weight for a group must be between 0 and 100</errorMessage>
+    </validationRules>
+</CustomObject>

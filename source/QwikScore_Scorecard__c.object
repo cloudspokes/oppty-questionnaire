@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A record of question answers for a survey.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Completed_Questions__c</fullName>
+        <description>How many questions have been completed for this scorecard</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How many questions have been completed for this scorecard</inlineHelpText>
+        <label>Completed Questions</label>
+        <summarizedField>QwikScore_Question_Answer__c.IsAnswered__c</summarizedField>
+        <summaryForeignKey>QwikScore_Question_Answer__c.QwikScore_Scorecard__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Completion_Percent__c</fullName>
+        <description>How far complete is this survey?</description>
+        <externalId>false</externalId>
+        <formula>Completed_Questions__c /  Questions_in_Survey__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>How far complete is this survey?</inlineHelpText>
+        <label>Completion Percent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Final_Score__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>What is the final score of this survey score card?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What is the final score of this survey score card?</inlineHelpText>
+        <label>Final Score</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Questions_in_Survey__c</fullName>
+        <description>How many questions are there in this survey?</description>
+        <externalId>false</externalId>
+        <formula>QwikScore_Survey__r.Questions_in_Survey__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>How many questions are there in this survey?</inlineHelpText>
+        <label>Questions in Survey</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QwikScore_Survey__c</fullName>
+        <description>Which survey is this scorecard related to?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Which survey is this scorecard related to?</inlineHelpText>
+        <label>QwikScore Survey</label>
+        <referenceTo>QwikScore__c</referenceTo>
+        <relationshipLabel>Scorecards</relationshipLabel>
+        <relationshipName>QwikScore_Scorecard</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Scored__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Has the survey been scored and locked?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Has the survey been scored and locked?</inlineHelpText>
+        <label>Scored</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Total_Raw_Score__c</fullName>
+        <description>The total raw score of all related questions.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The total raw score of all related questions.</inlineHelpText>
+        <label>Total Raw Score</label>
+        <summarizedField>QwikScore_Question_Answer__c.Answer_Value__c</summarizedField>
+        <summaryFilterItems>
+            <field>QwikScore_Question_Answer__c.IsAnswered__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QwikScore_Question_Answer__c.QwikScore_Scorecard__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <label>QwikScore Scorecard</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>QSS-{000000}</displayFormat>
+        <label>QwikScore Scorecard Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>QwikScore Scorecard</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>all_questions_answered_before_scoreing</fullName>
+        <active>true</active>
+        <description>All questions must be answered before a scorecard can be scored.</description>
+        <errorConditionFormula>AND(Completed_Questions__c &lt; Questions_in_Survey__c,  Scored__c = true)</errorConditionFormula>
+        <errorMessage>All questions must be answered before a scorecard can be scored.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Grade_Scorecard</fullName>
+        <availability>online</availability>
+        <description>Grade this score card</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Grade Scorecard</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)}
+var myvar = sforce.apex.execute(&quot;qwikScore&quot;,&quot;gradeScoreCard&quot;, {scoreCardId:&quot;{!QwikScore_Scorecard__c.Id}&quot;,surveyId:&quot;{!QwikScore_Scorecard__c.QwikScore_SurveyId__c}&quot;});
+window.location.reload();</url>
+    </webLinks>
+</CustomObject>

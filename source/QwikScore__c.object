@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to hold survey questions.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is this survey available to be taken?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is this survey available to be taken?</inlineHelpText>
+        <label>Active</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Average_Score__c</fullName>
+        <description>What is the average score for this survey?</description>
+        <externalId>false</externalId>
+        <formula>TotalScore__c  / Completed_Surveys__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>What is the average score for this survey?</inlineHelpText>
+        <label>Average Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Completed_Surveys__c</fullName>
+        <externalId>false</externalId>
+        <label>Completed Surveys</label>
+        <summaryFilterItems>
+            <field>QwikScore_Scorecard__c.Scored__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QwikScore_Scorecard__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Groups_in_Survey__c</fullName>
+        <description>How many question groups are there in this survey</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How many question groups are there in this survey</inlineHelpText>
+        <label>Groups in Survey</label>
+        <summaryForeignKey>QwikScore_Question_Group__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Max_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Max Score</label>
+        <summarizedField>QwikScore_Scorecard__c.Final_Score__c</summarizedField>
+        <summaryFilterItems>
+            <field>QwikScore_Scorecard__c.Scored__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QwikScore_Scorecard__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Min_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Min Score</label>
+        <summarizedField>QwikScore_Scorecard__c.Final_Score__c</summarizedField>
+        <summaryFilterItems>
+            <field>QwikScore_Scorecard__c.Scored__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QwikScore_Scorecard__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>min</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <description>What opportunity is this survey related to?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What opportunity is this survey related to?</inlineHelpText>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>QwikScore Surveys</relationshipLabel>
+        <relationshipName>QwikScore_Surveys</relationshipName>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Questions_in_Survey__c</fullName>
+        <description>How many questions are in this survey?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How many questions are in this survey?</inlineHelpText>
+        <label>Questions in Survey</label>
+        <summarizedField>QwikScore_Question_Group__c.Questions_in_Group__c</summarizedField>
+        <summaryForeignKey>QwikScore_Question_Group__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Survey_Description__c</fullName>
+        <description>What is the survey about?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What is the survey about?</inlineHelpText>
+        <label>Survey Description</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>15</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Survey_Setup_Completion_Percent__c</fullName>
+        <description>How close is this this survey to being completely set up?</description>
+        <externalId>false</externalId>
+        <formula>Total_Completion_Percent__c / Groups_in_Survey__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>How close is this this survey to being completely set up?</inlineHelpText>
+        <label>Survey Setup Completion Percent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Take_Survey__c</fullName>
+        <description>Click to take this survey</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&apos;/apex/qwikScore?surveyid=&apos;+Id, &apos;Take Survey&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Click to take this survey</inlineHelpText>
+        <label>Take Survey</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalScore__c</fullName>
+        <externalId>false</externalId>
+        <label>TotalScore</label>
+        <summarizedField>QwikScore_Scorecard__c.Final_Score__c</summarizedField>
+        <summaryFilterItems>
+            <field>QwikScore_Scorecard__c.Scored__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QwikScore_Scorecard__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Completion_Percent__c</fullName>
+        <description>The total percent of all group weights (used for calculating survey progress completion)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The total percent of all group weights (used for calculating survey progress completion)</inlineHelpText>
+        <label>Total Completion Percent</label>
+        <summarizedField>QwikScore_Question_Group__c.Total_Question_Weight__c</summarizedField>
+        <summaryForeignKey>QwikScore_Question_Group__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Group_Weight__c</fullName>
+        <description>How much do all the created groups weights add up to? Should be 100% for a completed survey</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How much do all the created groups weights add up to? Should be 100% for a completed survey</inlineHelpText>
+        <label>Total Group Weight</label>
+        <summarizedField>QwikScore_Question_Group__c.Group_Weight__c</summarizedField>
+        <summaryForeignKey>QwikScore_Question_Group__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Weight__c</fullName>
+        <description>What is the total percentage weight represented by all attached question groups (should be 100% for a survey that is ready to be taken).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What is the total percentage weight represented by all attached question groups (should be 100% for a survey that is ready to be taken).</inlineHelpText>
+        <label>Total Weight</label>
+        <summarizedField>QwikScore_Question_Group__c.Group_Weight__c</summarizedField>
+        <summaryForeignKey>QwikScore_Question_Group__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <label>QwikScore Survey</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>QwikScore Survey Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>QwikScore Surveys</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Active__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Survey_Setup_Completion_Percent__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Questions_in_Survey__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Groups_in_Survey__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Cannot_exceed_100_total_group_weight</fullName>
+        <active>true</active>
+        <errorConditionFormula>Total_Weight__c  &gt; 100</errorConditionFormula>
+        <errorMessage>You cannot exceed 100% for the total group weight of a survey. Please reduce the weight of associated groups to total 100%.</errorMessage>
+    </validationRules>
+</CustomObject>

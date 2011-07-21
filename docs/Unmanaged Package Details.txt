@@ -1,0 +1,5 @@
+Package Name: QwikScore
+Version Number: 1.0
+Version Name: Contest Release
+Installation URL: https://login.salesforce.com/packaging/installPackage.apexp?p0=04tE0000000PcOy
+Password: &:E5m/de

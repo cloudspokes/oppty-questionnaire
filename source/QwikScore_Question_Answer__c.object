@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Answers to questions in a survey.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Answer_Text__c</fullName>
+        <description>What is the text value of the answer given to this question.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What is the text value of the answer given to this question.</inlineHelpText>
+        <label>Answer Text</label>
+        <length>250</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Answer_Unique_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A unique identifier to make sure the same question is not answered more than once for a single scorecard.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>A unique identifier to make sure the same question is not answered more than once for a single scorecard.</inlineHelpText>
+        <label>Answer Unique Id</label>
+        <length>50</length>
+        <required>true</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Answer_Value__c</fullName>
+        <description>Numeric value derived from question text. Used for calculating score.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISNUMBER( Answer_Text__c) , VALUE( Answer_Text__c ), 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Numeric value derived from question text. Used for calculating score.</inlineHelpText>
+        <label>Answer Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsAnswered__c</fullName>
+        <description>Displays 0 if the question has not been answered. Displays 1 if it has been.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISNULL( Answer_Text__c ), 0, 1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Displays 0 if the question has not been answered. Displays 1 if it has been.</inlineHelpText>
+        <label>IsAnswered</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuestionGroupId__c</fullName>
+        <externalId>false</externalId>
+        <formula>Question__r.QwikScore_Question_Group__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>QuestionGroupId</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Question__c</fullName>
+        <description>Which question is this an answer for?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Which question is this an answer for?</inlineHelpText>
+        <label>Question</label>
+        <referenceTo>QwikScore_Question__c</referenceTo>
+        <relationshipLabel>Question Answers</relationshipLabel>
+        <relationshipName>QwikScore_Question_Answers</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>QwikScore_Scorecard__c</fullName>
+        <description>Which scorecard does this question answer belong to?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Which scorecard does this question answer belong to?</inlineHelpText>
+        <label>Scorecard</label>
+        <referenceTo>QwikScore_Scorecard__c</referenceTo>
+        <relationshipLabel>Question Answers</relationshipLabel>
+        <relationshipName>QwikScore_Question_Answers</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Weighted_Score__c</fullName>
+        <description>The weighted score of this answer</description>
+        <externalId>false</externalId>
+        <formula>Answer_Value__c *  Question__r.Question_Weight__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The weighted score of this answer</inlineHelpText>
+        <label>Weighted Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>QwikScore Question Answer</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Question__c</columns>
+        <columns>Answer_Text__c</columns>
+        <columns>Answer_Value__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>QQA-{000000}</displayFormat>
+        <label>Answer ID</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>QwikScore Question Answers</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+</CustomObject>

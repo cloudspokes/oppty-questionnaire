@@ -1,0 +1,13 @@
+Opportunity Questionnaire
+
+URL: http://www.cloudspokes.com/challenge_detail.html?contestID=219
+Blog: http://blog.cloudspokes.com/2011/07/opportunity-questionnaire-winner.html
+Challenge end date: Thu Jun 30 01:00:00 GMT 2011
+
+Description
+===========
+We would like to build a two level weighted calculator inside of SFDC. The system will be generic to use support multiple use cases. Currently we want to use this system to create a survey for our opportunities. By filling out this survey we will be able to rate our opportunities.
+
+Requirements
+============
+Creating a data model<br> Each calculator will consist of one to many groups which will contain one to many questions. The calculator itself will only contain a name which will be unique for all calculators. All group weights will add up to 100 for the scorecard. <br> Each group will have a weight assigned to it and a group name. Each group will contain one to many questions. All question weights will add up to 100 in the group. Each group will also have a unique numeric sequence number.<br> Each question will have be made up of a weight (1-100), the question, question type and help text for the question. The question type will be Numeric or text. Text questions will just be used to capture free form text. Numeric questions for now will be 1-4 for valid values. Each question will also have a unique numeric sequence number.<br> <br><br> Calculating survey results<br> Provide an interface to display scorecard (could be a wizard based on the groups or it could be all one page)<br> Provide ability to fill out survey. For all numeric scores, the user will enter 1-4 (could be drop down or clicking a button 1-4) <br> You will store the results for each question with the user who completed the scorecard and the date the scorecard was completed<br> We will also provide the ability to save a scorecard and also finish a scorecard. Clicking finish will score the results Any text questions will not be included in scoring and will just capture free form text.<br> Groups will be displayed in order based on ascending sequence number and questions will be displayed in order based on ascending sequence number inside of a group. <br><br> Scoring survey results<br> Please see this scorecard as an <a href="https://spreadsheets.google.com/a/appirio.com/spreadsheet/ccc?key=tdOa3e5zkkZ35IpK_a2WsMA&amp;authkey=CKm42KkM#gid=0" target="_blank">example</a>.<br> Scoring will consist of multiplying the question&#39;s answer times the question weight. Sum all the questions for a group and multiply the sum by the group weight. Sum all of the weighted groups and divide by four. This will give the overall score.
